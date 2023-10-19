@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 
 import requests
 
@@ -11,13 +11,19 @@ app.secret_key = 'Ma clé secrète'
 
 
 class PokemonForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
-    codepostal = StringField('codepostal', validators=[DataRequired(), Length(max=5)])
+    search = StringField('Barre de Recherche', validators=[DataRequired()])
 
 
 @app.route('/')
 def index():
-    return 'Hello World'
+    pokeform = PokemonForm()
+    return render_template('index.html', form=pokeform)
+
+@app.route('/pokemon', methods=['POST'])
+def pokemon():
+    pokeform = PokemonForm()
+    return pokeform.search.data
+
 
 if __name__ == '__main__':
     app.run()

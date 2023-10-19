@@ -12,15 +12,15 @@
     <h1>Pokeunotor</h1>
 
     {% if form %}
-        <form method="POST" action="/form">
+        <form method="POST" action="/pokemon">
             {{ form.csrf_token }}
-            {{ form.name.label }} {{ form.name() }}
-            <input type="submit" value="Go">
+            {{ form.search.label }} {{ form.search() }}
+            <input type="submit" value="Search">
         </form>
     {% endif %}
 
-    {% if name %}
-        <p> Hello test : {{name}} ! Super</p>
+    {% if search %}
+        <p> Hello test : {{search}} ! Super</p>
     {% endif %}
 
 </body>
