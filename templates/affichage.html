@@ -10,11 +10,21 @@
         <br>
         <span> Nom Anglais du Pokémon : {{nomEN}} </span>
         <br>
-        <span> Type(s) du Pokémon : {{types}} </span>
+        <div class="types">
+            <span> Type(s) du Pokémon : </span>
+            {% for image in types %}
+                <img src="{{image}}">
+            {% endfor %}
+        </div>
         <br>
         <span> Sprite du pokémon : <br> <img src="{{sprite}}"> </span>
         <br>
-        <span> Statistiques du pokémon : {{stats}} </span>
+        <div class="stats">
+            <span> Statistiques du pokémon : </span>
+            {% for stat in stats %}
+                <p>{{stat}} : {{stats[stat]}}</p>
+            {% endfor %}
+        </div>
 
     </div>
 </body>
