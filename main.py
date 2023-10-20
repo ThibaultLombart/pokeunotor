@@ -6,6 +6,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Length
 
+import extractData
+
 app = Flask(__name__)
 app.secret_key = 'Ma clé secrète'
 
@@ -22,7 +24,14 @@ def index():
 @app.route('/pokemon', methods=['POST'])
 def pokemon():
     pokeform = PokemonForm()
-    return pokeform.search.data
+    url = extractData.getURLFromName(pokeform.search.data)
+    nomFR = extractData.getNomFrPokemon(url)
+    nomEN = extractData.getNomEnPokemon(url)
+    types = extractData.getTypePokemon(url)
+    sprite = extractData.getImageSpritePokemon(url)
+    stats = extractData.getStatPokemon(url)
+    return render_template("affichage.html", nomFR=nomFR, nomEN=nomEN, types=types, sprite=sprite, stats=stats)
+
 
 
 if __name__ == '__main__':
