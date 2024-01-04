@@ -2,30 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pokeunotor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Carte Pokémon</title>
+    <!-- Link Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/affichage.css') }}">
+
 </head>
 <body>
-    <div>
-        <span> Nom Français du Pokémon : {{nomFR}} </span>
-        <br>
-        <span> Nom Anglais du Pokémon : {{nomEN}} </span>
-        <br>
-        <div class="types">
-            <span> Type(s) du Pokémon : </span>
-            {% for image in types %}
-                <img src="{{image}}">
-            {% endfor %}
-        </div>
-        <br>
-        <span> Sprite du pokémon : <br> <img src="{{sprite}}"> </span>
-        <br>
-        <div class="stats">
-            <span> Statistiques du pokémon : </span>
-            {% for stat in stats %}
-                <p>{{stat}} : {{stats[stat]}}</p>
-            {% endfor %}
-        </div>
+    <div class="container mt-4">
+        <div class="pokemon-card">
+            <div class="pokemon-details">
+                <h5 class="pokemon-name">Nom (FR): {{ nomFR }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 10px;">Nom (EN): {{ nomEN }}</h6>
 
+                <p class="pokemon-id">ID: {{ id }}</p>
+
+
+                <div class="pokemon-image">
+                    <img src="{{ sprite }}" alt="Sprite" class="pokemon-image">
+                </div>
+
+                <div class="mt-3">
+                    <h6>Types:</h6>
+                    <ul class="types-list">
+                        {% for type in types %}
+                            <img src="{{type}}" alt="type">
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="mt-3">
+                    <h6>Stats:</h6>
+                    <ul class="stats-list">
+                        <li>HP: {{ stats.hp }}</li>
+                        <li>Attack: {{ stats.atk }}</li>
+                        <li>Defense: {{ stats.def }}</li>
+                        <li>Special Attack: {{ stats.spe_atk }}</li>
+                        <li>Special Defense: {{ stats.spe_def }}</li>
+                        <li>Speed: {{ stats.vit }}</li>
+                    </ul>
+                </div>
+                <button class="button is-success mt-3">Ajouter à la collection</button>
+            </div>
+        </div>
     </div>
 </body>
+
+
 </html>

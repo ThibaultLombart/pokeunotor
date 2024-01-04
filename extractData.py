@@ -17,10 +17,15 @@ def getDict(url: str) -> dict:
 
     return dico
 
+
+
 def testDonnees(url: str) -> bool:
     data = recuperationDonnees(url)
     return len(data) != 2
 
+def getIdPokemon(url : str) -> str:
+    data = recuperationDonnees(url)
+    return data['pokedexId']
 
 def getNomFrPokemon(url: str) -> str:
     data = recuperationDonnees(url)

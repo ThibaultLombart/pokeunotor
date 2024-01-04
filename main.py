@@ -10,7 +10,7 @@ import extractData
 
 app = Flask(__name__)
 app.secret_key = 'Ma clé secrète'
-
+app.static_folder = 'static'
 
 class PokemonForm(FlaskForm):
     search = StringField('Barre de Recherche', validators=[DataRequired()])
@@ -35,7 +35,7 @@ def pokemon():
 
     dico = extractData.getDict(url)
 
-    return render_template("affichage.html", nomFR=dico['nomFR'], nomEN=dico['nomEN'], types=dico['types'], sprite=dico['sprite'], stats=dico['stats'])
+    return render_template("affichage.html", id=extractData.getIdPokemon(url), nomFR=dico['nomFR'], nomEN=dico['nomEN'], types=dico['types'], sprite=dico['sprite'], stats=dico['stats'])
 
 
 
