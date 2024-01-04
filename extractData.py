@@ -5,6 +5,20 @@ def recuperationDonnees(url: str) -> dict:
     reponse = requests.get(url)
     return reponse.json()
 
+def filter_and_sort_pokemon(varName):
+    try:
+        results = recuperationDonnees("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
+
+        # Filtre
+        filtered_pokemon = [{'name': pokemon['name']['fr'], 'url': pokemon['sprites']['regular']} for pokemon in results if pokemon['name']['fr'].lower().startswith(varName.lower())]
+
+        sorted_pokemon = sorted(filtered_pokemon, key=lambda x: x['name'])
+
+        return sorted_pokemon
+
+    except KeyError:
+        print("La réponse JSON ne contient pas la clé 'results'")
+        return []
 
 def getDict(url: str) -> dict:
     dico = {}
