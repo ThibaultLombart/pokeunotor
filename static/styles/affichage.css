@@ -1,0 +1,63 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+.pokemon-card {
+    max-width: 300px;
+    margin: auto;
+    background-color: #f8f9fa;
+    border: 2px solid #343a40;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.pokemon-image {
+    border-top: 2px solid #343a40;
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #343a40;
+}
+
+.pokemon-details {
+    padding: 20px;
+    text-align: center;
+}
+
+.pokemon-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.card-subtitle {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.types-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.types-list li {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: #343a40;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.stats-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.stats-list li {
+    background-color: #343a40;
+    color: #fff;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
