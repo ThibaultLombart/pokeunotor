@@ -31,12 +31,17 @@ def pokemon():
     url = extractData.getURLFromName(pokeform.search.data)
 
     if not extractData.testDonnees(url):
-        url = extractData.getURLFromName("missingno")
+        return redirect("/pokemon/0")
+    return redirect("/pokemon/"+str(extractData.getIdPokemon(url)))
+
+@app.route('/pokemon/<int:id>', methods=['GET'])
+def pokemonNumber(id):
+    url = extractData.getURLFromName(str(id))
 
     dico = extractData.getDict(url)
 
-    return render_template("affichage.html", id=extractData.getIdPokemon(url), nomFR=dico['nomFR'], nomEN=dico['nomEN'], types=dico['types'], sprite=dico['sprite'], stats=dico['stats'])
-
+    return render_template("affichage.html", id=extractData.getIdPokemon(url), nomFR=dico['nomFR'], nomEN=dico['nomEN'],
+                           types=dico['types'], sprite=dico['sprite'], stats=dico['stats'])
 
 
 if __name__ == '__main__':
