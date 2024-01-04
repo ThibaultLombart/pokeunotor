@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, jsonify, request
 
 import requests
 
@@ -42,6 +42,17 @@ def pokemonNumber(id):
 
     return render_template("affichage.html", id=extractData.getIdPokemon(url), nomFR=dico['nomFR'], nomEN=dico['nomEN'],
                            types=dico['types'], sprite=dico['sprite'], stats=dico['stats'])
+
+
+
+@app.route('/search', methods=['GET'])
+def search():
+    term = request.args.get('term', '')
+
+    results = extractData.filter_and_sort_pokemon(term)
+
+    return jsonify(results)
+
 
 
 if __name__ == '__main__':
