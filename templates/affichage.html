@@ -44,7 +44,17 @@
                         <li>Speed: {{ stats.vit }}</li>
                     </ul>
                 </div>
-                <button class="button is-success mt-3">Ajouter à la collection</button>
+                {% if current_user.is_authenticated %}
+                    {% if collection %}
+                        <form method="POST" action="{{ url_for('add_to_favorites', pokemon_id=id) }}">
+                            <button class="button is-danger mt-3" type="submit">Retirer de la Collection</button>
+                        </form>
+                    {% else %}
+                        <form method="POST" action="{{ url_for('add_to_favorites', pokemon_id=id) }}">
+                            <button class="button is-success mt-3" type="submit">Ajouter a la collection</button>
+                        </form>
+                    {% endif%}
+                {% endif %}
             </div>
         </div>
     </div>

@@ -20,6 +20,15 @@ def filter_and_sort_pokemon(varName):
         print("La réponse JSON ne contient pas la clé 'results'")
         return []
 
+def listeId(idList):
+    results = recuperationDonnees("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
+
+    # Filtre
+    filtered_pokemon = [{'pokedexId': pokemon['pokedexId'],'name': pokemon['name']['fr'], 'url': pokemon['sprites']['regular']} for pokemon in results if
+                        pokemon['pokedexId'] in idList]
+
+    return filtered_pokemon
+
 def getDict(url: str) -> dict:
     data = recuperationDonnees(url)
     dico = {}

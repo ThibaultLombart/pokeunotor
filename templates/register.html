@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/index.css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" action="{{ url_for('register') }}">
+            {{ form.hidden_tag() }}
+            <h2>Register</h2>
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+            <label for="username">Username:</label>
+            {{ form.username(class="form-control") }}
+            <label for="email">Email:</label>
+            {{ form.email(class="form-control") }}
+            <label for="password">Password:</label>
+            {{ form.password(class="form-control") }}
+            <label for="confirm_password">Confirm Password:</label>
+            {{ form.confirm_password(class="form-control") }}
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+</body>
+</html>

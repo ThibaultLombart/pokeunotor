@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/index.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Bienvenue, {{ current_user.username }}!</h2>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <h3>Pokemons capturés</h3>
+        <div class="flex-container">
+            {% if captured_pokemons %}
+                {% for pokemon in captured_pokemons %}
+                    <a href="/pokemon/{{pokemon.pokedexId}}">
+                        <div class="pokemon-card">
+                            <img src="{{ pokemon.url }}" alt="{{ pokemon.name }}">
+                            <p>{{ pokemon.name }}</p>
+                            <p>{{ pokemon.pokedexId }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <div class="pokemon-card">
+                    <p>Aucun pour le moment</p>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>

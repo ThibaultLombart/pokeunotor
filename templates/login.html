@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/index.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" action="{{ url_for('login') }}">
+            {{ form.hidden_tag() }}
+            <h2>Login</h2>
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+            <label for="email">Email:</label>
+            {{ form.email(class="form-control") }}
+            <label for="password">Password:</label>
+            {{ form.password(class="form-control") }}
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
+    </div>
+</body>
+</html>
