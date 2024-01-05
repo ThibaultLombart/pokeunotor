@@ -61,3 +61,48 @@
     margin-bottom: 10px;
     border-radius: 5px;
 }
+
+
+/*  ------------------------- Evolutions ------------------------ */
+.evolution-container{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 2px solid #343a40;
+    border-radius: 10px;
+}
+
+.evolution-container h2{
+    font-size: 50px;
+}
+
+.evolution-flex {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0;
+}
+
+.evolution-flex a{
+    color: black;
+}
+
+.evolution-flex a:hover{
+    text-decoration: none;
+}
+
+.evolution-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+.evolution-card img {
+    max-width: 100%;
+    height: auto;
+}

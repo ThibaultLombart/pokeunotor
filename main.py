@@ -29,10 +29,11 @@ def pokemonRedirect():
 def pokemon():
     pokeform = PokemonForm()
     url = extractData.getURLFromName(pokeform.search.data)
+    data = extractData.recuperationDonnees(url)
 
     if not extractData.testDonnees(url):
         return redirect("/pokemon/0")
-    return redirect("/pokemon/"+str(extractData.getIdPokemon(url)))
+    return redirect("/pokemon/"+str(extractData.getIdPokemon(data)))
 
 @app.route('/pokemon/<int:id>', methods=['GET'])
 def pokemonNumber(id):
@@ -40,8 +41,8 @@ def pokemonNumber(id):
 
     dico = extractData.getDict(url)
 
-    return render_template("affichage.html", id=extractData.getIdPokemon(url), nomFR=dico['nomFR'], nomEN=dico['nomEN'],
-                           types=dico['types'], sprite=dico['sprite'], stats=dico['stats'])
+    return render_template("affichage.html", id=dico['pokedexId'], nomFR=dico['nomFR'], nomEN=dico['nomEN'],
+                           types=dico['types'], sprite=dico['sprite'], stats=dico['stats'], pres = dico['pre'], nexts = dico['next'])
 
 
 

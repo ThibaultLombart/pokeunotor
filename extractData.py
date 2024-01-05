@@ -21,38 +21,79 @@ def filter_and_sort_pokemon(varName):
         return []
 
 def getDict(url: str) -> dict:
+    data = recuperationDonnees(url)
     dico = {}
 
-    dico['nomFR'] = getNomFrPokemon(url)
-    dico['nomEN'] = getNomEnPokemon(url)
-    dico['types'] = getTypePokemon(url)
-    dico['sprite'] = getImageSpritePokemon(url)
-    dico['stats'] = getStatPokemon(url)
+    dico['pokedexId'] = getIdPokemon(data)
+    dico['nomFR'] = getNomFrPokemon(data)
+    dico['nomEN'] = getNomEnPokemon(data)
+    dico['types'] = getTypePokemon(data)
+    dico['sprite'] = getImageSpritePokemon(data)
+    dico['stats'] = getStatPokemon(data)
+    dico['pre'] = evolutionsPre(data)
+    dico['next'] = evolutionsNext(data)
 
     return dico
 
+def evolutionsPre(data: dict):
+    if(data['evolution']):
+        pre = data['evolution']['pre']
+
+        if pre is None:
+            return None
+        else:
+            liste = []
+            for i in pre:
+                dico = {}
+                pre1 = recuperationDonnees(getURLFromName(str(i['pokedexId'])))
+                dico['pokedexId'] = pre1['pokedexId']
+                dico['nameFR'] = getNomFrPokemon(pre1)
+                dico['nameEN'] = getNomEnPokemon(pre1)
+                dico['sprite'] = getImageSpritePokemon(pre1)
+                dico['types'] = getTypePokemon(pre1)
+                dico['condition'] = i['condition']
+                liste.append(dico)
+            return liste
+    return None
+
+def evolutionsNext(data: dict):
+    if(data['evolution']):
+        next = data['evolution']['next']
+
+        if next is None:
+            return None
+        else:
+            liste = []
+            for i in next:
+                dico = {}
+                next1 = recuperationDonnees(getURLFromName(str(i['pokedexId'])))
+                dico['pokedexId'] = next1['pokedexId']
+                dico['nameFR'] = getNomFrPokemon(next1)
+                dico['nameEN'] = getNomEnPokemon(next1)
+                dico['sprite'] = getImageSpritePokemon(next1)
+                dico['types'] = getTypePokemon(next1)
+                dico['condition'] = i['condition']
+                liste.append(dico)
+            return liste
+    return None
 
 
 def testDonnees(url: str) -> bool:
     data = recuperationDonnees(url)
     return len(data) != 2
 
-def getIdPokemon(url : str) -> str:
-    data = recuperationDonnees(url)
+def getIdPokemon(data) -> str:
     return data['pokedexId']
 
-def getNomFrPokemon(url: str) -> str:
-    data = recuperationDonnees(url)
+def getNomFrPokemon(data) -> str:
     return data['name']['fr']
 
 
-def getNomEnPokemon(url: str) -> str:
-    data = recuperationDonnees(url)
+def getNomEnPokemon(data) -> str:
     return data['name']['en']
 
 
-def getTypePokemon(url: str) -> list:
-    data = recuperationDonnees(url)
+def getTypePokemon(data) -> list:
     types = []
     if data['types'] is not None:
         for typePokemon in range(len(data['types'])):
@@ -60,13 +101,11 @@ def getTypePokemon(url: str) -> list:
     return types
 
 
-def getImageSpritePokemon(url: str) -> str:
-    data = recuperationDonnees(url)
+def getImageSpritePokemon(data) -> str:
     return data['sprites']['regular']
 
 
-def getStatPokemon(url: str) -> dict:
-    data = recuperationDonnees(url)
+def getStatPokemon(data) -> dict:
     stats = data['stats']
     if stats is None:
         stats = {}
