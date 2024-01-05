@@ -32,6 +32,7 @@ def getDict(url: str) -> dict:
     dico['stats'] = getStatPokemon(data)
     dico['pre'] = evolutionsPre(data)
     dico['next'] = evolutionsNext(data)
+    dico['resistances'] = getResistances(data)
 
     return dico
 
@@ -117,6 +118,8 @@ def getStatPokemon(data) -> dict:
         stats['vit'] = 0
     return stats
 
+def getResistances(data) -> dict:
+    return data['resistances']
 
 def getURLFromName(name: str) -> str:
     return "https://api-pokemon-fr.vercel.app/api/v1/pokemon/" + name

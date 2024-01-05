@@ -21,7 +21,7 @@
 
 
                 <div class="pokemon-image">
-                    <img src="{{ sprite }}" alt="Sprite" class="pokemon-image">
+                    <img src="{{ sprite }}" alt="Sprite">
                 </div>
 
                 <div class="mt-3">
@@ -61,13 +61,13 @@
                         <h3>Nom (FR): {{ evolution.nameFR }}</h3>
                         <h3>Nom (EN): {{ evolution.nameEN }}</h3>
                         <p>ID: {{ evolution.pokedexId }}</p>
+                        <img class="pokemon-image" src="{{ evolution.sprite }}" alt="Pokemon {{ evolution.nameFR }}">
                         <p>Types: </p>
                         <ul class="types-list">
                             {% for type in evolution.types %}
                             <img src="{{type}}" alt="type">
                             {% endfor %}
                         </ul>
-                        <img src="{{ evolution.sprite }}" alt="Pokemon {{ evolution.nameFR }}">
                         <p>Condition d'évolution: {{ evolution.condition }}</p>
                     </div>
                 </a>
@@ -80,13 +80,14 @@
                 <h3>Nom (FR): {{ nomFR }}</h3>
                 <h3>Nom (EN): {{ nomEN }}</h3>
                 <p>ID: {{ id }}</p>
+                <img class="pokemon-image" src="{{ sprite }}" alt="Pokemon {{ nomFR }}">
                 <p>Types: </p>
                 <ul class="types-list">
                     {% for type in types %}
                         <img src="{{type}}" alt="type">
                     {% endfor %}
                 </ul>
-                <img src="{{ sprite }}" alt="Pokemon {{ nomFR }}">
+
             </div>
 
         {% if nexts %}
@@ -97,13 +98,14 @@
                         <h3>Nom (FR): {{ evolution.nameFR }}</h3>
                         <h3>Nom (EN): {{ evolution.nameEN }}</h3>
                         <p>ID: {{ evolution.pokedexId }}</p>
+                        <img class="pokemon-image" src="{{ evolution.sprite }}" alt="Pokemon {{ evolution.nameFR }}">
                         <p>Types: </p>
                         <ul class="types-list">
                             {% for type in evolution.types %}
                             <img src="{{type}}" alt="type">
                             {% endfor %}
                         </ul>
-                        <img src="{{ evolution.sprite }}" alt="Pokemon {{ evolution.nameFR }}">
+
                         <p>Condition d'évolution: {{ evolution.condition }}</p>
                     </div>
                 </a>
@@ -111,8 +113,70 @@
 
             {% endif %}
         </div>
+    </div>
+
+    <div>
+        {% if resistances %}
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="18">Tableau des Résistances de {{ nomFR }}</th>
+                </tr>
+                <tr>
+                    {% for type in resistances %}
+                        <th>
+                            <img src="https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/types/{{type.name|lower|replace('é', 'e')|replace('è', 'e')|replace('à', 'a')|replace('ô', 'o') }}.png"
+                                 alt="{{type.name}} picture">
+                        </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for type in resistances %}
+                        <th>
+                            {% if type.multiplier == 0 %}
+                            <div class="immunite">
+                                {{type.multiplier}}
+                            </div>
+                            {% elif type.multiplier == 0.25 %}
+                            <div class="doubleresis">
+                                {{type.multiplier}}
+                            </div>
+                            {% elif type.multiplier == 0.5 %}
+                            <div class="resis">
+                                {{type.multiplier}}
+                            </div>
+                            {% elif type.multiplier == 1 %}
+                            <div class="neutre">
+                                {{type.multiplier}}
+                            </div>
+                            {% elif type.multiplier == 2 %}
+                            <div class="faiblesse">
+                                {{type.multiplier}}
+                            </div>
+                            {% else %}
+                            <div class="doublefaibl">
+                                {{type.multiplier}}
+                            </div>
+                            {% endif %}
+                        </th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th colspan="3">Légende : </th>
+                    <td colspan="3" class="immunite">Immunité</td>
+                    <td colspan="3" class="doubleresis">Double Résistance</td>
+                    <td colspan="3" class="resis">Résistance</td>
+                    <td colspan="3" class="faiblesse">Faiblesse</td>
+                    <td colspan="3" class="doublefaibl">Double Faiblesse</td>
+                </tr>
+            </tbody>
+        </table>
+        {% endif %}
 
     </div>
+
 </body>
 
 

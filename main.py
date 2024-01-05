@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, jsonify, request
-
+from unidecode import unidecode
 import requests
 
 from flask_wtf import FlaskForm
@@ -42,7 +42,7 @@ def pokemonNumber(id):
     dico = extractData.getDict(url)
 
     return render_template("affichage.html", id=dico['pokedexId'], nomFR=dico['nomFR'], nomEN=dico['nomEN'],
-                           types=dico['types'], sprite=dico['sprite'], stats=dico['stats'], pres = dico['pre'], nexts = dico['next'])
+                           types=dico['types'], sprite=dico['sprite'], stats=dico['stats'], pres = dico['pre'], nexts = dico['next'], resistances = dico['resistances'])
 
 
 
