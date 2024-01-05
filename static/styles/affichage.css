@@ -15,6 +15,7 @@
     width: 100%;
     height: auto;
     border-bottom: 2px solid #343a40;
+    margin-top: 10px;
 }
 
 .pokemon-details {
@@ -105,4 +106,43 @@
 .evolution-card img {
     max-width: 100%;
     height: auto;
+}
+
+
+/* ------------------------------- Tableau des Resistances ----------------------- */
+
+.immunite{
+    background-color: #AAAAAA;
+}
+
+.doubleresis{
+    background-color: #3AF24B;
+}
+
+.resis{
+    background-color: #AAFFAA;
+}
+
+.faiblesse{
+    background-color: #FFAAAA;
+}
+
+.doublefaibl{
+    background-color: #FF5E4D;
+}
+
+.neutre{
+    background-color: #ffffaa;
+}
+
+table {
+    border-collapse: collapse;
+    margin:auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid #ddd;
 }
