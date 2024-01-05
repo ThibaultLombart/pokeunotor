@@ -7,6 +7,57 @@
 
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
     </head>
+
+    <header class="bg-primary text-white p-3 fixed-top">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="{{ url_for('index') }}">
+
+                <img src="{{ url_for('static', filename='img/keunotor.png') }}" width="100px" height="100px" alt="Keunotor">
+
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+              <a class="navbar-item" href="{{ url_for('index') }}">
+                Accueil
+              </a>
+
+              <a class="navbar-item" href="{{ url_for('dashboard') }}">
+                Pokémons capturés
+              </a>
+            </div>
+
+              {% if not current_user.is_authenticated %}
+                <div class="navbar-end">
+                  <div class="navbar-item">
+                    <div class="buttons">
+                      <a class="button is-light" href="{{ url_for('register') }}">
+                        <strong>S'enregistrer</strong>
+                      </a>
+                      <a class="button is-light" href="{{ url_for('login') }}">
+                          <strong>Se connecter </strong>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+
+                <a class="button is-light" href="{{ url_for('logout') }}">
+                    <strong> Logout </strong>
+                </a>
+              {% endif %}
+          </div>
+        </nav>
+    </header>
+
     <body>
         <div class="container">
             <div class="pokeball"></div>
@@ -24,18 +75,6 @@
                 </div>
                 <ul id="suggestionsList"></ul>
             </form>
-                <div class="field is-grouped content has-text-centered" style="margin-left: 30px">
-                    <p class="control">
-                        <a class="button is-success" href="/login">
-                            Login
-                        </a>
-                    </p>
-                    <p class="control">
-                        <a class="button is-success" href="/register">
-                            Register
-                        </a>
-                    </p>
-                </div>
 
 
         </div>

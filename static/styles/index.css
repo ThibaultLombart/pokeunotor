@@ -90,6 +90,20 @@ footer {
     background-color: #f5f5f5;
 }
 
+.custom-card {
+    width: 200px; /* Ajustez la largeur selon vos besoins */
+    margin: 10px; /* Ajoutez une marge entre les cartes */
+}
+
+.centered-number {
+    text-align: center;
+}
+
+.columns-centered {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 /* -------------------------------------- Suggestion -------------------------------- */
 #suggestionsList {
@@ -118,3 +132,4 @@ footer {
 #suggestionsList li span {
     font-size: 16px;
 }
+

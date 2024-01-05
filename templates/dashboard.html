@@ -1,34 +1,99 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/index.css">
+
     <title>Dashboard</title>
 </head>
+
+<header class="bg-primary text-white p-3 fixed-top">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/keunotor.png') }}" width="100px" height="100px"
+                    alt="Keunotor">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{{ url_for('index') }}">
+                    Accueil
+                </a>
+
+                <a class="navbar-item" href="{{ url_for('dashboard') }}">
+                    Pokémons capturés
+                </a>
+            </div>
+
+            {% if not current_user.is_authenticated %}
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-light" href="{{ url_for('register') }}">
+                            <strong>S'enregistrer</strong>
+                        </a>
+                        <a class="button is-light" href="{{ url_for('login') }}">
+                            <strong>Se connecter </strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <a class="button is-light" href="{{ url_for('logout') }}">
+                <strong> Logout </strong>
+            </a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+
 <body>
+        <h2 style="text-align: center">Bienvenue, {{ current_user.username }} !</h2>
+        <h3 style="text-align: center">Pokemons capturés :</h3>
+
     <div class="container">
-        <h2>Bienvenue, {{ current_user.username }}!</h2>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        <h3>Pokemons capturés</h3>
-        <div class="flex-container">
+<div class="columns-centered">
             {% if captured_pokemons %}
                 {% for pokemon in captured_pokemons %}
-                    <a href="/pokemon/{{pokemon.pokedexId}}">
-                        <div class="pokemon-card">
-                            <img src="{{ pokemon.url }}" alt="{{ pokemon.name }}">
-                            <p>{{ pokemon.name }}</p>
-                            <p>{{ pokemon.pokedexId }}</p>
-                        </div>
-                    </a>
+                    <div class="column is-3">
+                        <a href="/pokemon/{{pokemon.pokedexId}}">
+                            <div class="card custom-card mx-auto">
+                                <div class="card-image">
+                                    <figure class="image is-3by2">
+                                        <img src="{{pokemon.url}}" alt="{{pokemon.name}}">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="media-content">
+                                        <p class="title is-4">{{pokemon.name}}</p>
+                                    </div>
+                                </div>
+                                <div class="content centered-number">
+                                    <p>Numéro : {{ pokemon.pokedexId }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 {% endfor %}
             {% else %}
-                <div class="pokemon-card">
+                <div class="pokemon-card mx-auto">
                     <p>Aucun pour le moment</p>
                 </div>
             {% endif %}
-
         </div>
     </div>
 </body>
+
+
 </html>
