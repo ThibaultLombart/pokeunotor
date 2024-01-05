@@ -48,6 +48,71 @@
             </div>
         </div>
     </div>
+
+
+    <div class="evolution-container">
+        <h2>Evolutions:</h2>
+        <div class="evolution-flex">
+            {% if pres %}
+
+                {% for evolution in pres %}
+                <a href="/pokemon/{{evolution.pokedexId}}">
+                    <div class="evolution-card">
+                        <h3>Nom (FR): {{ evolution.nameFR }}</h3>
+                        <h3>Nom (EN): {{ evolution.nameEN }}</h3>
+                        <p>ID: {{ evolution.pokedexId }}</p>
+                        <p>Types: </p>
+                        <ul class="types-list">
+                            {% for type in evolution.types %}
+                            <img src="{{type}}" alt="type">
+                            {% endfor %}
+                        </ul>
+                        <img src="{{ evolution.sprite }}" alt="Pokemon {{ evolution.nameFR }}">
+                        <p>Condition d'évolution: {{ evolution.condition }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+
+            {% endif %}
+
+        <div class="evolution-card">
+                <h3><strong>Carte Actuelle</strong></h3>
+                <h3>Nom (FR): {{ nomFR }}</h3>
+                <h3>Nom (EN): {{ nomEN }}</h3>
+                <p>ID: {{ id }}</p>
+                <p>Types: </p>
+                <ul class="types-list">
+                    {% for type in types %}
+                        <img src="{{type}}" alt="type">
+                    {% endfor %}
+                </ul>
+                <img src="{{ sprite }}" alt="Pokemon {{ nomFR }}">
+            </div>
+
+        {% if nexts %}
+
+                {% for evolution in nexts %}
+                <a href="/pokemon/{{evolution.pokedexId}}">
+                    <div class="evolution-card">
+                        <h3>Nom (FR): {{ evolution.nameFR }}</h3>
+                        <h3>Nom (EN): {{ evolution.nameEN }}</h3>
+                        <p>ID: {{ evolution.pokedexId }}</p>
+                        <p>Types: </p>
+                        <ul class="types-list">
+                            {% for type in evolution.types %}
+                            <img src="{{type}}" alt="type">
+                            {% endfor %}
+                        </ul>
+                        <img src="{{ evolution.sprite }}" alt="Pokemon {{ evolution.nameFR }}">
+                        <p>Condition d'évolution: {{ evolution.condition }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+
+            {% endif %}
+        </div>
+
+    </div>
 </body>
 
 
