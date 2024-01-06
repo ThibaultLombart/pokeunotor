@@ -5,83 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/index.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/header.css') }}">
     <title>Dashboard</title>
 </head>
 
-<header class="bg-primary text-white p-3 fixed-top">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="{{ url_for('index') }}">
+
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='img/keunotor.png') }}" width="100px" height="100px"
                     alt="Keunotor">
             </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="{{ url_for('index') }}">
-                    Accueil
-                </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn text-dark" href="{{ url_for('index') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn text-dark" href="{{ url_for('dashboard') }}">Pokémons capturés</a>
+                    </li>
+                </ul>
 
-                <a class="navbar-item" href="{{ url_for('dashboard') }}">
-                    Pokémons capturés
-                </a>
+                {% if not current_user.is_authenticated %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn text-dark" href="{{ url_for('register') }}">S'enregistrer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn text-dark" href="{{ url_for('login') }}">Se connecter</a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                </ul>
+                {% endif %}
             </div>
+        </nav>
 
-            {% if not current_user.is_authenticated %}
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-light" href="{{ url_for('register') }}">
-                            <strong>S'enregistrer</strong>
-                        </a>
-                        <a class="button is-light" href="{{ url_for('login') }}">
-                            <strong>Se connecter </strong>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <a class="button is-light" href="{{ url_for('logout') }}">
-                <strong> Logout </strong>
-            </a>
-            {% endif %}
-        </div>
-    </nav>
-</header>
-
-<body>
-        <h2 style="text-align: center">Bienvenue, {{ current_user.username }} !</h2>
-        <h3 style="text-align: center">Pokemons capturés :</h3>
+    <h2 style="text-align: center">Bienvenue, {{ current_user.username }} !</h2>
+    <h3 style="text-align: center">Pokemons capturés :</h3>
 
     <div class="container">
-<div class="columns-centered">
+        <div class="is-flex" style="flex-wrap: wrap; justify-content: center;">
             {% if captured_pokemons %}
                 {% for pokemon in captured_pokemons %}
-                    <div class="column is-3">
+                    <div class="card custom-card mx-2 my-2">
                         <a href="/pokemon/{{pokemon.pokedexId}}">
-                            <div class="card custom-card mx-auto">
-                                <div class="card-image">
-                                    <figure class="image is-3by2">
-                                        <img src="{{pokemon.url}}" alt="{{pokemon.name}}">
-                                    </figure>
+                            <div class="card-image">
+                                <figure class="image is-3by2">
+                                    <img src="{{pokemon.url}}" alt="{{pokemon.name}}">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media-content">
+                                    <p class="title is-4">{{pokemon.name}}</p>
                                 </div>
-                                <div class="card-content">
-                                    <div class="media-content">
-                                        <p class="title is-4">{{pokemon.name}}</p>
-                                    </div>
-                                </div>
-                                <div class="content centered-number">
-                                    <p>Numéro : {{ pokemon.pokedexId }}</p>
-                                </div>
+                            </div>
+                            <div class="content centered-number">
+                                <p>Numéro : {{ pokemon.pokedexId }}</p>
                             </div>
                         </a>
                     </div>
