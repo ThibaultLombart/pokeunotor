@@ -8,6 +8,7 @@ body {
 
 .container {
     width: 400px;
+    margin-bottom: 50px;
 }
 
 .form-container {
