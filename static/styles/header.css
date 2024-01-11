@@ -7,3 +7,14 @@
 footer {
     background-color: #f5f5f5;
 }
+
+.navbar .navbar-toggler-icon {
+  background-image: url('https://mdbootstrap.com/img/svg/hamburger2.svg?color=000');
+}
+
+.navbar-toggler.toggler-example {
+  cursor: pointer;
+}
+.dark-blue-text {
+  color: #0A38F5;
+}
