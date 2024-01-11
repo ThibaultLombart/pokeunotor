@@ -15,17 +15,17 @@
                     alt="Keunotor">
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
+            <div class="navbar-collapse collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
                         <a class="nav-link btn text-dark" href="{{ url_for('index') }}">Accueil</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link btn text-dark" href="{{ url_for('dashboard') }}">Pokémons capturés</a>
                     </li>
                 </ul>
@@ -69,8 +69,10 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/js/bundles/4.20.0/compiled.min.js"></script>
         <script src="{{ url_for('static', filename='js/search.js') }}"></script>
     </body>
+
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
