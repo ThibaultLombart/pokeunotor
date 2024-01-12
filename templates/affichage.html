@@ -84,6 +84,22 @@
                         <li>Special Defense: {{ stats.spe_def }}</li>
                         <li>Speed: {{ stats.vit }}</li>
                     </ul>
+                    <script>
+                        var audioFileName = "{{id}}" + ' - ' + "{{nomFR}}" + '.ogg';
+                    </script>
+                    <audio id="pokemon-audio" controls>
+                        <source id="audio-source" type="audio/ogg">
+                        Your browser does not support the audio element.
+                    </audio>
+
+                    <script>
+                        // Mise à jour de la source audio après le chargement de la page
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var audioSource = document.getElementById('audio-source');
+                            audioSource.src = "{{ url_for('serve_sound', filename='') }}" + audioFileName;
+                            audioSource.parentNode.load();
+                        });
+                    </script>
                 </div>
                 {% if current_user.is_authenticated %}
                     {% if collection %}
