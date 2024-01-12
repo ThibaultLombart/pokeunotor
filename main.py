@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, jsonify, request
+from flask import Flask, render_template, redirect, url_for, jsonify, request, send_from_directory
 
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -6,7 +6,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-
+import os
 import requests
 
 from flask_wtf import FlaskForm
@@ -152,6 +152,10 @@ def add_to_favorites(pokemon_id):
         db.session.commit()
     return redirect(url_for('pokemonNumber', id=pokemon_id))
 
+@app.route('/static/sound/<path:filename>')
+def serve_sound(filename):
+    sound_path = os.path.join(app.root_path, 'static', 'sound')
+    return send_from_directory(sound_path, filename)
 
 if __name__ == '__main__':
     app.run()
